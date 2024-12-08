@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mountain Panorama Viewer</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <style>
+        #panorama {
+            width: 100vw;
+            height: 100vh;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .custom-hotspot {
+            height: 50px;
+            width: 50px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 25px;
+            cursor: pointer;
+        }
+        .info-overlay {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-family: Arial, sans-serif;
+            z-index: 1000;
+            text-align: center;
+            transition: opacity 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="info-overlay" id="info">
+        Используйте мышь или стрелки для навигации. Двойной клик для полноэкранного режима.
+    </div>
+    <div id="panorama"></div>
+    <script>
+        pannellum.viewer('panorama', {
+            "type": "equirectangular",
+            "panorama": "panorama.jpg",
+            "autoLoad": true,
+            "autoRotate": -2,
+            "compass": true,
+            "showFullscreenCtrl": true,
+            "showControls": true,
+            "mouseZoom": true,
+            "hfov": 120,
+            "minHfov": 50,
+            "maxHfov": 120,
+            "pitch": 0,
+            "yaw": 0,
+            "keyboardZoom": true,
+            "draggable": true,
+            "disableKeyboardCtrl": false,
+            "friction": 0.4,
+            "touchPanSpeedCoeffFactor": 1
+        });
+
+        // Hide info message after 5 seconds
+        setTimeout(() => {
+            document.getElementById('info').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('info').style.display = 'none';
+            }, 300);
+        }, 5000);
+    </script>
+</body>
+</html>
